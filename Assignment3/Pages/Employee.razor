@@ -1,0 +1,151 @@
+﻿@page "/empinfo"
+@using Assignment3.Data;
+
+<h3>Employee</h3>
+
+<EditForm Model="@p" OnValidSubmit="insertPerson">
+    <DataAnnotationsValidator></DataAnnotationsValidator>
+    <ValidationSummary></ValidationSummary>
+    <table>
+        <tr>
+
+            <td>User ID</td>
+            <td>:</td>
+            <td><InputText id="userid" @bind-Value="p.userID"> </InputText></td>
+
+        </tr>
+        <tr>
+
+            <td>Password</td>
+            <td>:</td>
+            <td><InputText id="password" @bind-Value="p.password"> </InputText></td>
+
+        </tr>
+        <tr>
+
+            <td>Name</td>
+            <td>:</td>
+            <td><InputText id="name" @bind-Value="p.name"> </InputText></td>
+
+        </tr>
+        <tr>
+
+            <td>Address </td>
+            <td>:</td>
+            <td><InputText id="address" @bind-Value="p.address"> </InputText></td>
+
+        </tr>
+
+        <tr>
+
+            <td>Country</td>
+            <td>:</td>
+            <td>
+                <InputSelect @bind-Value="p.country">
+                    <option value="USA">USA</option>
+                    <option value="Canada">Canada</option>
+                    <option value="Mexico">Mexico</option>
+                </InputSelect>
+            </td>
+
+        </tr>
+
+        <tr>
+
+            <td>Zip Code:</td>
+            <td>:</td>
+            <td><InputNumber id="salary" @bind-Value="p.zipCode"></InputNumber></td>
+
+        </tr>
+        <tr>
+
+            <td>Email:</td>
+            <td>:</td>
+            <td><InputText id="email" @bind-Value="p.email"></InputText></td>
+
+        </tr>
+        <tr>
+
+            <td>Sex:</td>
+            <td>:</td>
+            <td>
+                <InputRadioGroup id="sex" @bind-Value="@p.sex">
+                    <InputRadio Value="1" /> Male
+                    <InputRadio Value="2" /> Female
+
+                </InputRadioGroup>
+            </td>
+
+        </tr>
+        <tr>
+
+            <td>Language</td>
+            <td>:</td>
+            <td>
+                <label>
+                    <InputCheckbox @bind-Value="p.LanguageEnglish" /> English
+                </label>
+                <label>
+                    <InputCheckbox @bind-Value="p.LanguageNonEnglish" /> Non English
+                </label>
+            </td>
+
+
+
+
+        </tr>
+        <tr>
+
+            <td>About</td>
+            <td>:</td>
+            <td><InputTextArea id="about" @bind-Value="p.about" rows="4" cols="40"></InputTextArea></td>
+
+        </tr>
+
+        <tr>
+
+            <td></td>
+            <td></td>
+            <td><button type="submit">Submit</button></td>
+
+        </tr>
+
+    </table>
+
+
+
+
+</EditForm>
+
+
+<h3>@message</h3>
+
+@code {
+    private string message = "";
+
+    private Person p = new Person();
+
+    public async Task insertPerson()
+    {
+
+        message = "The following has been submitted:";
+        message += "\nuserID: " + p.userID;
+        message += "\nPassword: " + p.password;
+        message += "\nName: " + p.name;
+        message += "\nAddress: " + p.address;
+        message += "\nCountry: " + p.country;
+        message += "\n Zip Code: " + p.zipCode;
+        message += "\nEmail: " + p.email;
+        message += "\nSex: " + p.sex; // a 1 equals male and a 2 equals female
+        message += "\nThe language selected is :";
+        if (p.LanguageEnglish)
+        {
+            message += "\n English speaking";
+        }
+        if (p.LanguageNonEnglish)
+        {
+            message += "\n Non English speaking";
+        }
+
+    }
+}
